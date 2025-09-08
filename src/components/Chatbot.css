@@ -1,0 +1,305 @@
+/* Chatbot.css
+   Styles for the Multilingual English Tutor Bot
+   - supports language selector
+   - shows phonetic spelling messages (class: .phonetic)
+   - typing dots indicator while waiting for API
+   - responsive and modern look
+*/
+
+/* --- Container --- */
+.chatbot-container {
+  width: 460px;
+  max-width: 96%;
+  margin: 22px auto;
+  padding: 18px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+  box-shadow: 0 10px 30px rgba(18, 30, 50, 0.07);
+  display: flex;
+  flex-direction: column;
+  font-family: Inter, "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+  color: #0f2437;
+  box-sizing: border-box;
+}
+
+/* --- Header --- */
+.chatbot-container h2 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 650;
+  text-align: center;
+  color: #0b2a45;
+}
+
+/* --- Language selector --- */
+.lang-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.lang-select label {
+  font-size: 13px;
+  color: #284055;
+  opacity: 0.9;
+}
+
+.lang-select select {
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid #e4eefb;
+  background: #fff;
+  font-size: 14px;
+  outline: none;
+  box-shadow: 0 3px 12px rgba(11, 116, 255, 0.03);
+}
+
+/* --- Chat window --- */
+.chat-window {
+  flex: 1 1 auto;
+  background: #ffffff;
+  border: 1px solid #e6eef8;
+  border-radius: 12px;
+  padding: 12px;
+  overflow-y: auto;
+  max-height: 460px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  scroll-behavior: smooth;
+}
+
+/* Each message wrapper */
+.chat-message {
+  display: inline-block;
+  clear: both;
+  max-width: 78%;
+  padding: 10px 14px;
+  margin: 8px 0;
+  border-radius: 14px;
+  line-height: 1.45;
+  font-size: 14px;
+  word-wrap: break-word;
+  box-shadow: 0 1px 0 rgba(10, 20, 40, 0.02) inset;
+}
+
+/* User message (right) */
+.chat-message.user {
+  background: linear-gradient(90deg, #0b74ff, #0066e6);
+  color: #fff;
+  float: right;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 14px;
+  transform-origin: right;
+  box-shadow: 0 8px 20px rgba(11, 116, 255, 0.12);
+}
+
+/* Bot message (left) */
+.chat-message.bot {
+  background: #f5f8fb;
+  color: #0f2437;
+  float: left;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 14px;
+}
+
+/* Styling for system/notice messages (like short prompts) */
+.chat-message.system {
+  flex-basis: 100%;
+  text-align: center;
+  background: transparent;
+  color: #4a6b88;
+  font-size: 13px;
+  padding: 6px 0;
+  margin: 6px 0;
+  box-shadow: none;
+}
+
+/* --- Phonetic / Pronunciation display --- */
+.phonetic {
+  display: block;
+  margin-top: 8px;
+  font-style: italic;
+  font-size: 13px;
+  color: #254a6b;
+  background: rgba(37,74,107,0.06);
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 1px dashed rgba(37,74,107,0.08);
+  max-width: 88%;
+  word-break: break-word;
+}
+
+/* small helper meta text inside messages */
+.meta {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* --- Input area --- */
+.input-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.input-container input[type="text"] {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #e0eaf6;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+  transition: box-shadow 0.12s ease, border-color 0.12s ease;
+  box-shadow: 0 1px 2px rgba(16, 34, 56, 0.03);
+}
+
+.input-container input[type="text"]::placeholder {
+  color: #a9bdd6;
+}
+
+.input-container input[type="text"]:focus {
+  border-color: #9cc5ff;
+  box-shadow: 0 8px 22px rgba(11, 116, 255, 0.08);
+}
+
+/* Buttons */
+.input-container button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #0b74ff;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.12s ease;
+  box-shadow: 0 6px 18px rgba(11, 116, 255, 0.12);
+}
+
+.input-container button[type="button"] {
+  background: #ffffff;
+  color: #0b74ff;
+  border: 1px solid #d8e8ff;
+  box-shadow: none;
+}
+
+.input-container button:hover {
+  transform: translateY(-1px);
+}
+
+/* --- Typing dots indicator (shown while waiting for API) --- */
+.typing-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+}
+
+.typing-dots span {
+  width: 7px;
+  height: 7px;
+  background: #9aaecf;
+  border-radius: 50%;
+  display: inline-block;
+  animation: td-bounce 1.2s infinite ease-in-out;
+  opacity: 0.95;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+@keyframes td-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.6; }
+  40% { transform: translateY(-7px); opacity: 1; }
+}
+
+/* --- Quick follow-up buttons area (if you add quick actions) --- */
+.quick-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+
+.quick-actions button {
+  background: transparent;
+  border: 1px solid #e2eefc;
+  color: #0b74ff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.quick-actions button:hover {
+  background: rgba(11,116,255,0.06);
+}
+
+/* --- Scrollbar styling --- */
+.chat-window::-webkit-scrollbar {
+  width: 8px;
+}
+.chat-window::-webkit-scrollbar-thumb {
+  background: rgba(16,34,56,0.06);
+  border-radius: 8px;
+}
+.chat-window::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* --- Responsive adjustments --- */
+@media (max-width: 520px) {
+  .chatbot-container {
+    width: 96%;
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .chat-message {
+    font-size: 13px;
+    padding: 9px 12px;
+  }
+
+  .input-container button, .input-container input[type="text"] {
+    font-size: 13px;
+  }
+
+  .lang-select label {
+    font-size: 12px;
+  }
+}
+
+
+.back-button-nav {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  padding: 8px 14px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+.back-button-nav:hover {
+  background-color: #0056b3;
+}
