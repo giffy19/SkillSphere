@@ -7,7 +7,7 @@ const Home = () => {
     <div className="home-container">
       {/* Hero Section */}
       <header className="hero">
-        <h1>🚀 React Chatbot Platform</h1>
+        <h1>🚀 Learning Platform</h1>
         <p>Prepare. Practice. Perform.</p>
       </header>
 
