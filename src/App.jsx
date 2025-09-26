@@ -7,11 +7,11 @@ import QuizPage from "./pages/QuizPage";
 import QuizCategories from "./pages/QuizCategories";
 
 function App() {
-  // If running locally → use "/", otherwise "/SkillSphere"
-  const base = window.location.hostname === "localhost" ? "/" : "/SkillSphere";
+  // Use basename only if deployed on GitHub Pages
+  const basename = import.meta.env.MODE === "production" ? "/SkillSphere" : "/";
 
   return (
-    <Router basename={base}>
+    <Router basename={basename}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/quiz/:category" element={<QuizPage />} />
@@ -23,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; // <-- THIS LINE WAS MISSING
